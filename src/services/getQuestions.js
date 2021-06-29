@@ -7,7 +7,7 @@ const BASE_URL = 'https://opentdb.com/api.php';
 export default function getQuestions(category, difficulty, type) {
 	let constructed_url = BASE_URL;
 
-	constructed_url += `?amount=10`;
+	constructed_url += `?amount=3`;
 
 	if (category !== 'any') constructed_url += `&category=${category}`;
 

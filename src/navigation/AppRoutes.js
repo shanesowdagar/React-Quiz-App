@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Quiz } from '../pages';
-import Home from '../pages/Home';
+import { Home, Quiz, Results } from '../pages';
 
 const AppRoutes = () => {
 	return (
@@ -8,6 +7,7 @@ const AppRoutes = () => {
 			<Switch>
 				<Route exact path='/' component={Home} />
 				<Route exact path='/quiz' component={Quiz} />
+				<Route exact path='/results' component={Results} />
 			</Switch>
 		</BrowserRouter>
 	);
