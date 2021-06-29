@@ -1,9 +1,10 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
 const Results = () => {
 	const location = useLocation();
+	const history = useHistory();
 	console.log('🚀 ~ file: Results.js ~ line 7 ~ Results ~ location', location);
 
 	const [numRightAnswers] = useState(location.state.numRightAnswers);
@@ -18,7 +19,7 @@ const Results = () => {
 			alignItems='center'
 			w='90%'
 			margin='auto'
-			border='2px solid yellow'
+			// border='2px solid yellow'
 			h='100vh'
 		>
 			<Box
@@ -30,9 +31,13 @@ const Results = () => {
 				borderRadius='7px'
 			>
 				<Heading mb='20px'>Results</Heading>
-				<Text fontSize='lg'>
+				<Text fontSize='lg' mb='20px'>
 					{numRightAnswers} correct answers out of 3 questions
 				</Text>
+
+				<Flex justify='center'>
+					<Button onClick={() => history.replace('/')}>Home</Button>
+				</Flex>
 			</Box>
 		</Flex>
 	);

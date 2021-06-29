@@ -38,7 +38,7 @@ const Quiz = () => {
 			alignItems='center'
 			w='90%'
 			margin='auto'
-			border='2px solid yellow'
+			// border='2px solid yellow'
 			h='100vh'
 		>
 			<QuestionCard

@@ -1,7 +1,15 @@
-import { Box, Button, Flex, Grid, Heading, Text } from '@chakra-ui/react';
+import {
+	Badge,
+	Box,
+	Button,
+	Flex,
+	Grid,
+	Heading,
+	Text,
+} from '@chakra-ui/react';
+import { decode } from 'html-entities';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { decode } from 'html-entities';
 
 const QuestionCard = ({
 	questionObj,
@@ -11,14 +19,21 @@ const QuestionCard = ({
 	numRightAnswers,
 	setNumRightAnswers,
 }) => {
-	let { question, correct_answer, incorrect_answers, type } = questionObj;
+	let { question, category, correct_answer, incorrect_answers, type } =
+		questionObj;
+
+	console.log(questionObj);
 
 	const history = useHistory();
 
 	const [userAnsweredCorrectly, setUserAnsweredCorrectly] = useState('');
+	// const [selectedAnswer, setSelectedAnswer] = useState('');
+	const [disabledAnswerBtn, setDisabledAnswerBtn] = useState(false);
 
 	const btnClick = (e) => {
 		let selectedAnswer = e.target.innerText;
+		// setSelectedAnswer(selectedAnswer);
+		setDisabledAnswerBtn(!disabledAnswerBtn);
 
 		//Check if selectedAnswer is correct_answer
 
@@ -36,10 +51,9 @@ const QuestionCard = ({
 
 	useEffect(() => {
 		setUserAnsweredCorrectly('');
+		setDisabledAnswerBtn(false);
 	}, [questionObj]);
 
-	// TODO Refactor the questionCard to make it
-	// responsive on smaller screens
 	return (
 		<Box
 			background='gray.700'
@@ -51,32 +65,48 @@ const QuestionCard = ({
 		>
 			<Heading mb='30px'>Question {questionNumber}</Heading>
 
+			<Badge mb='15px' colorScheme='teal' variant='solid'>
+				{category}
+			</Badge>
+
 			<Text mb='30px'>{decode(question)}</Text>
 
 			{type === 'boolean' && (
 				<Grid templateColumns='1fr 1fr' templateRows='1fr' gap='6'>
 					<Button
 						onClick={btnClick}
-						colorScheme='gray.600'
-						// mr='20px'
 						variant='outline'
+						border='none'
+						bg='gray.600'
+						disabled={disabledAnswerBtn}
 					>
 						True
 					</Button>
-					<Button onClick={btnClick} colorScheme='gray.600' variant='outline'>
+					<Button
+						onClick={btnClick}
+						variant='outline'
+						border='none'
+						bg='gray.600'
+						disabled={disabledAnswerBtn}
+					>
 						False
 					</Button>
 				</Grid>
 			)}
 
 			{type === 'multiple' && (
-				<Grid templateColumns='1fr 1fr' templateRows='1fr 1fr' gap='6'>
+				<Grid
+					templateColumns={['1fr', '1fr 1fr']}
+					templateRows={('repeat(4,1fr)', '1fr 1fr')}
+					gap={['3', '6']}
+				>
 					{[...incorrect_answers, correct_answer].map((answer, index) => (
 						<Button
 							key={index}
 							onClick={btnClick}
 							colorScheme='gray.600'
 							variant='outline'
+							disabled={disabledAnswerBtn}
 						>
 							{decode(answer)}
 						</Button>
@@ -85,26 +115,26 @@ const QuestionCard = ({
 			)}
 
 			{userAnsweredCorrectly === true && (
-				<Heading my='10px' color='green.500'>
+				<Heading textAlign='center' my='10px' color='green.500'>
 					Correct Answer
 				</Heading>
 			)}
 			{userAnsweredCorrectly === false && (
-				<Heading my='10px' color='red.500'>
+				<Heading textAlign='center' my='10px' color='red.500'>
 					Wrong Answer
 				</Heading>
 			)}
 
 			{userAnsweredCorrectly !== '' && isLastQuestion === false && (
-				<Button mb='30px' onClick={nextQuestion}>
-					Next Question
-				</Button>
+				<Flex justifyContent='center'>
+					<Button onClick={nextQuestion}>Next Question</Button>
+				</Flex>
 			)}
 
 			{userAnsweredCorrectly !== '' && isLastQuestion === true && (
-				<Button mb='30px' onClick={completeQuiz}>
-					Results
-				</Button>
+				<Flex justifyContent='center'>
+					<Button onClick={completeQuiz}>Results</Button>
+				</Flex>
 			)}
 		</Box>
 	);
