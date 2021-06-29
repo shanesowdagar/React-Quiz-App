@@ -54,6 +54,7 @@ const Home = () => {
 
 	return (
 		<Flex
+			// background={['pink', 'brown', 'whatsapp.700', 'telegram.800']}
 			direction='column'
 			justifyContent='space-evenly'
 			w='90%'
@@ -64,9 +65,11 @@ const Home = () => {
 			<Heading textAlign='center'>Quiz Application</Heading>
 
 			<Box
-				alignSelf='center'
+				// alignSelf='center'
+				alignSelf={['stretch', 'center']}
+				w={[null, '100%', '500px']}
 				p='10px'
-				// border='1px solid red'
+				// border='2px solid yellow'
 				background='gray.700'
 				borderRadius='7px'
 			>

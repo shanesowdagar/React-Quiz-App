@@ -34,11 +34,11 @@ const Quiz = () => {
 
 	return (
 		<Flex
-			direction='column'
-			justifyContent='space-evenly'
+			justifyContent='center'
+			alignItems='center'
 			w='90%'
 			margin='auto'
-			// border='1px solid yellow'
+			border='2px solid yellow'
 			h='100vh'
 		>
 			<QuestionCard

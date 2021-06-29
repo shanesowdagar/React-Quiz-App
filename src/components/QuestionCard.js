@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Grid, Heading, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { decode } from 'html-entities';
@@ -38,18 +38,27 @@ const QuestionCard = ({
 		setUserAnsweredCorrectly('');
 	}, [questionObj]);
 
+	// TODO Refactor the questionCard to make it
+	// responsive on smaller screens
 	return (
-		<Box>
-			<Heading mb='10px'>Question {questionNumber}</Heading>
+		<Box
+			background='gray.700'
+			p='20px'
+			w={['100%', '80%', 'auto']}
+			maxW={[null, null, '500px']}
+			minW={[null, null, '500px']}
+			borderRadius='7px'
+		>
+			<Heading mb='30px'>Question {questionNumber}</Heading>
 
 			<Text mb='30px'>{decode(question)}</Text>
 
 			{type === 'boolean' && (
-				<Box>
+				<Grid templateColumns='1fr 1fr' templateRows='1fr' gap='6'>
 					<Button
 						onClick={btnClick}
 						colorScheme='gray.600'
-						mr='20px'
+						// mr='20px'
 						variant='outline'
 					>
 						True
@@ -57,23 +66,22 @@ const QuestionCard = ({
 					<Button onClick={btnClick} colorScheme='gray.600' variant='outline'>
 						False
 					</Button>
-				</Box>
+				</Grid>
 			)}
 
 			{type === 'multiple' && (
-				<Box>
+				<Grid templateColumns='1fr 1fr' templateRows='1fr 1fr' gap='6'>
 					{[...incorrect_answers, correct_answer].map((answer, index) => (
 						<Button
 							key={index}
 							onClick={btnClick}
 							colorScheme='gray.600'
-							mr='20px'
 							variant='outline'
 						>
 							{decode(answer)}
 						</Button>
 					))}
-				</Box>
+				</Grid>
 			)}
 
 			{userAnsweredCorrectly === true && (
