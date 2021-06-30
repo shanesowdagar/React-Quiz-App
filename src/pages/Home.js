@@ -7,6 +7,7 @@ import {
 	Heading,
 	Select,
 	useColorModeValue,
+	useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -14,6 +15,8 @@ import ColorModeToggleBtn from '../components/ColorModeToggleBtn';
 import getQuestions from '../services/getQuestions';
 
 const Home = () => {
+	const Toast = useToast();
+
 	const boxBg = useColorModeValue('gray.300', 'gray.700');
 
 	const history = useHistory();
@@ -42,18 +45,32 @@ const Home = () => {
 			.then((res) => {
 				console.log(res.data);
 
+				if (res.data.response_code === 0) {
+					setFormValues({
+						...formValues,
+						isSubmitting: false,
+					});
+
+					history.push('/quiz', res.data);
+				} else if (res.data.response_code === 1) {
+					throw new Error('not_enough_questions');
+				} else {
+					throw new Error('other_error');
+				}
+			})
+			.catch((err) => {
 				setFormValues({
 					...formValues,
 					isSubmitting: false,
 				});
 
-				history.push('/quiz', res.data);
-			})
-			.catch((err) => {
-				console.log(err);
-				setFormValues({
-					...formValues,
-					isSubmitting: false,
+				//Show toast
+				Toast({
+					title: 'Oops, some error occurred',
+					description: 'Try starting quiz again',
+					status: 'error',
+					duration: 3000,
+					isClosable: true,
 				});
 			});
 	};
