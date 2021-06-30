@@ -8,9 +8,12 @@ BUILT with ☕ using React, Chakra UI, Axios, React Router
 
 API used : https://opentdb.com/
 
+The template for this readme was from [here](https://gist.github.com/martensonbj/6bf2ec2ed55f5be723415ea73c4557c4 )
+
 ___
 
 Project deployed at [https://epic-mclean-f28a81.netlify.app/](https://epic-mclean-f28a81.netlify.app/)
+
 
 ## Project Status
 [COMPLETE]
@@ -31,7 +34,7 @@ I wanted to understand how Chakra UI works, it's composability nature, theming c
 
 There are more things which can be added and refactored
 
-## Future Improvements/Functionalties
+## Future Improvements/Functionalties For future me 😎
 
 1. Right now, if a user chooses a wrong answer, a message will be shown, but the user will never know the right answer. Probably change some UI/UX elements to show user the actual correct answer
 
