@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
+import ColorModeToggleBtn from '../components/ColorModeToggleBtn';
 import QuestionCard from '../components/QuestionCard';
 
 const Quiz = () => {
@@ -36,11 +37,14 @@ const Quiz = () => {
 		<Flex
 			justifyContent='center'
 			alignItems='center'
+			direction='column'
+			position='relative'
 			w='90%'
 			margin='auto'
 			// border='2px solid yellow'
 			h='100vh'
 		>
+			<ColorModeToggleBtn />
 			<QuestionCard
 				questionObj={quizData.results[questionIndex]}
 				nextQuestion={nextQuestion}

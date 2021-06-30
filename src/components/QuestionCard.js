@@ -6,6 +6,7 @@ import {
 	Grid,
 	Heading,
 	Text,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import { decode } from 'html-entities';
 import { useEffect, useState } from 'react';
@@ -22,7 +23,9 @@ const QuestionCard = ({
 	let { question, category, correct_answer, incorrect_answers, type } =
 		questionObj;
 
-	console.log(questionObj);
+	const boxBg = useColorModeValue(null, 'gray.700');
+	const booleanBtnBg = useColorModeValue('gray.200', 'gray.700');
+	const booleanBtnColorScheme = useColorModeValue('gray', 'gray');
 
 	const history = useHistory();
 
@@ -56,7 +59,8 @@ const QuestionCard = ({
 
 	return (
 		<Box
-			background='gray.700'
+			bg={boxBg}
+			background=''
 			p='20px'
 			w={['100%', '80%', 'auto']}
 			maxW={[null, null, '500px']}
@@ -77,7 +81,8 @@ const QuestionCard = ({
 						onClick={btnClick}
 						variant='outline'
 						border='none'
-						bg='gray.600'
+						colorScheme={booleanBtnColorScheme}
+						bg={booleanBtnBg}
 						disabled={disabledAnswerBtn}
 					>
 						True
@@ -86,7 +91,8 @@ const QuestionCard = ({
 						onClick={btnClick}
 						variant='outline'
 						border='none'
-						bg='gray.600'
+						colorScheme={booleanBtnColorScheme}
+						bg={booleanBtnBg}
 						disabled={disabledAnswerBtn}
 					>
 						False
@@ -104,8 +110,10 @@ const QuestionCard = ({
 						<Button
 							key={index}
 							onClick={btnClick}
-							colorScheme='gray.600'
 							variant='outline'
+							border='none'
+							colorScheme={booleanBtnColorScheme}
+							bg={booleanBtnBg}
 							disabled={disabledAnswerBtn}
 						>
 							{decode(answer)}

@@ -6,12 +6,16 @@ import {
 	FormLabel,
 	Heading,
 	Select,
+	useColorModeValue,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import ColorModeToggleBtn from '../components/ColorModeToggleBtn';
 import getQuestions from '../services/getQuestions';
 
 const Home = () => {
+	const boxBg = useColorModeValue('gray.300', 'gray.700');
+
 	const history = useHistory();
 
 	const [formValues, setFormValues] = useState({
@@ -36,6 +40,7 @@ const Home = () => {
 		getQuestions(category, difficulty, type)
 			.then((res) => {
 				console.log(res.data);
+
 				setFormValues({
 					...formValues,
 					isSubmitting: false,
@@ -54,7 +59,7 @@ const Home = () => {
 
 	return (
 		<Flex
-			// background={['pink', 'brown', 'whatsapp.700', 'telegram.800']}
+			position='relative'
 			direction='column'
 			justifyContent='space-evenly'
 			w='90%'
@@ -62,15 +67,16 @@ const Home = () => {
 			// border='1px solid red'
 			h='100vh'
 		>
+			<ColorModeToggleBtn />
+
 			<Heading textAlign='center'>Quiz Application</Heading>
 
 			<Box
-				// alignSelf='center'
 				alignSelf={['stretch', 'center']}
 				w={[null, '100%', '500px']}
 				p='10px'
 				// border='2px solid yellow'
-				background='gray.700'
+				bg={boxBg}
 				borderRadius='7px'
 			>
 				<form display='flex' direction='column' onSubmit={handleFormSubmit}>

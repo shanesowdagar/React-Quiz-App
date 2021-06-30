@@ -1,11 +1,20 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Text,
+	useColorModeValue,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import ColorModeToggleBtn from '../components/ColorModeToggleBtn';
 
 const Results = () => {
 	const location = useLocation();
 	const history = useHistory();
-	console.log('🚀 ~ file: Results.js ~ line 7 ~ Results ~ location', location);
+
+	const boxBg = useColorModeValue('gray.200', 'gray.700');
 
 	const [numRightAnswers] = useState(location.state.numRightAnswers);
 
@@ -17,13 +26,15 @@ const Results = () => {
 		<Flex
 			justifyContent='center'
 			alignItems='center'
+			position='relative'
 			w='90%'
 			margin='auto'
 			// border='2px solid yellow'
 			h='100vh'
 		>
+			<ColorModeToggleBtn />
 			<Box
-				background='gray.700'
+				bg={boxBg}
 				p='20px'
 				w={['100%', '80%', 'auto']}
 				maxW={[null, null, '500px']}
