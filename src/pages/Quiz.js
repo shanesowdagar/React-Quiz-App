@@ -10,18 +10,21 @@ const Quiz = () => {
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [isLastQuestion, setIsLastQuestion] = useState(false);
 	const [numRightAnswers, setNumRightAnswers] = useState(0);
+	// const [totalNoQuestions] = useState(quizData.results.length);
 
 	const nextQuestion = () => {
-		// TODO Refactor
-		// TODO Array index is being checked manually with hardcoded values
-		// TODO : Refactor so that function works for any number of questions
-
 		// The question index will always be from 0 index
 		// If question Number 2 is being shown , the index is 1
 
+		let totalNoQuestions = quizData.results.length;
+		console.log(
+			'🚀 ~ file: Quiz.js ~ line 20 ~ nextQuestion ~ totalNoQuestions',
+			totalNoQuestions
+		);
+
 		let newIndex = questionIndex + 1;
 
-		if (newIndex < 3 && newIndex === 2) {
+		if (newIndex < totalNoQuestions && newIndex === totalNoQuestions - 1) {
 			setIsLastQuestion(true);
 			setQuestionIndex(newIndex);
 		} else {
@@ -52,6 +55,7 @@ const Quiz = () => {
 				isLastQuestion={isLastQuestion}
 				numRightAnswers={numRightAnswers}
 				setNumRightAnswers={setNumRightAnswers}
+				totalNoQuestions={quizData.results.length}
 			/>
 		</Flex>
 	);

@@ -19,6 +19,7 @@ const Home = () => {
 	const history = useHistory();
 
 	const [formValues, setFormValues] = useState({
+		noQuestions: '3',
 		category: 'any',
 		difficulty: 'easy',
 		type: 'boolean',
@@ -34,10 +35,10 @@ const Home = () => {
 			isSubmitting: true,
 		});
 
-		let { category, difficulty, type } = formValues;
+		let { noQuestions, category, difficulty, type } = formValues;
 
 		//Call the api and get the getQuestions
-		getQuestions(category, difficulty, type)
+		getQuestions(noQuestions, category, difficulty, type)
 			.then((res) => {
 				console.log(res.data);
 
@@ -80,6 +81,23 @@ const Home = () => {
 				borderRadius='7px'
 			>
 				<form display='flex' direction='column' onSubmit={handleFormSubmit}>
+					<FormControl id='noQuestions' mb='20px'>
+						<FormLabel>Number of Questions</FormLabel>
+						<Select
+							display='inline-block'
+							variant='filled'
+							value={formValues.noQuestions}
+							onChange={(e) =>
+								setFormValues({ ...formValues, noQuestions: e.target.value })
+							}
+						>
+							<option value='3'>3</option>
+							<option value='5'>5</option>
+							<option value='10'>10</option>
+							<option value='20'>20</option>
+						</Select>
+					</FormControl>
+
 					<FormControl id='category' mb='20px'>
 						<FormLabel>Quiz Category</FormLabel>
 						<Select

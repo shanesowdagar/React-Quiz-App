@@ -19,6 +19,7 @@ const QuestionCard = ({
 	isLastQuestion,
 	numRightAnswers,
 	setNumRightAnswers,
+	totalNoQuestions,
 }) => {
 	let { question, category, correct_answer, incorrect_answers, type } =
 		questionObj;
@@ -49,7 +50,10 @@ const QuestionCard = ({
 	};
 
 	const completeQuiz = () => {
-		history.replace('/results', { numRightAnswers: numRightAnswers });
+		history.replace('/results', {
+			numRightAnswers: numRightAnswers,
+			totalNoQuestions: totalNoQuestions,
+		});
 	};
 
 	useEffect(() => {

@@ -4,10 +4,10 @@ const BASE_URL = 'https://opentdb.com/api.php';
 
 //amount=10&category=11&difficulty=medium&type=boolean
 
-export default function getQuestions(category, difficulty, type) {
+export default function getQuestions(amount = 10, category, difficulty, type) {
 	let constructed_url = BASE_URL;
 
-	constructed_url += `?amount=3`;
+	constructed_url += `?amount=${amount}`;
 
 	if (category !== 'any') constructed_url += `&category=${category}`;
 

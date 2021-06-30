@@ -17,8 +17,9 @@ const Results = () => {
 	const boxBg = useColorModeValue('gray.200', 'gray.700');
 
 	const [numRightAnswers] = useState(location.state.numRightAnswers);
+	const [totalNoQuestions] = useState(location.state.totalNoQuestions);
 
-	if (numRightAnswers === undefined) {
+	if (numRightAnswers === undefined || totalNoQuestions === undefined) {
 		return <Redirect to='/' />;
 	}
 
@@ -43,7 +44,7 @@ const Results = () => {
 			>
 				<Heading mb='20px'>Results</Heading>
 				<Text fontSize='lg' mb='20px'>
-					{numRightAnswers} correct answers out of 3 questions
+					{numRightAnswers} correct answers out of {totalNoQuestions} questions
 				</Text>
 
 				<Flex justify='center'>
